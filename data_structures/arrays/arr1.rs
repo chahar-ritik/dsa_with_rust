@@ -1,27 +1,24 @@
 use std::io;
 fn main() {
-    let mut _a = [12, 34, 6 , 4 ];
-  //  let mut bucket = 0;
-    let mut  last = _a.len()-1;
-   for i in 0.._a.len()/2{
-       if i > last/2 {break}; 
-     /* bucket = _a[i];
-      _a[i] = _a[last];
-      _a[last] = bucket;*/
-
-      _a.swap(i,last-i);
-     
-      
-   }
-   println!("{:?}",_a);
+   
     let mut b: [i32; 2] = [0, 0];
     b[0] = 23;
     println!("{:?}", b);
 
-    let mut v = Vec::new();
-    v.push(2);
-    println!("{:?}", v);
+    let  a = [12, 34, 6 , 4 ];
+    println!("{:?}",a);
+    
+    let arr = _2d_arr_input();
+    println!("{:?}",arr);
 
+    let largest = largestno_2d_arr(arr);
+    println!("{largest}");
+
+    reverse_arr(a);
+    
+}
+
+fn _2d_arr_input() -> Vec<Vec<i32>>{
     // multi dimesional
 
     println!("Enter value in 2d array");
@@ -40,41 +37,38 @@ fn main() {
                   continue
                }
             };
+
+            
         }
     }
+    return arr
+}
 
-        
-       println!("{:?}",arr);
-   let mut result = i32::MIN; //it should me assign as i32::MIN as it is possible to put a negative integers
+fn largestno_2d_arr(arr: Vec<Vec<i32>> ) -> i32{
+    let mut result = i32::MIN; //it should me assign as i32::MIN as it is possible to put a negative integers
        //largest in array 
         for x in arr {
-        // here x will take refrence to  first row as linear array
+        // here x will take refrence to first row as linear array
         for y in x {
            if result < y {
             result = y;
            }
         }
     }
-    println!("Largest no. {result}");
+      result
        
-    let mut ve: Vec<Vec<i32>> = Vec::new();
-    ve.push(vec![1, 2, 3, 4, 5]);
-    ve.push(vec![1, 2, 3, 5, 6]);
-
+}
+fn reverse_arr(mut a: [i32;4]) -> [i32;4] {
     
-    for (i, v) in ve.iter_mut().enumerate() {
-        for (x, y) in v.iter_mut().enumerate() {
-        // if you are using iter() you can't mutate value
-        //use iter_mut to mutate elements
-         *y  *= 2; // needs deref as we are geting &mut i32
-            println!("Index [{}][{}] , Value : {}", i, x, y)
-        }
-    }
-    for i in 0..ve.len() {
-        for y in 0..ve[0].len() {
-           
-            println!("Index [{}][{}]", i, y);
-        }
-    }
-    print!("{:?}", ve);
+        let last = a.len()-1;
+   for i in 0..a.len()/2{
+      /* bucket = a[i];
+      a[i] = a[last];
+      a[last] = bucket;*/ 
+      
+       a.swap(i,last-i); // swap function used for swapping 
+     }
+
+   return a
+
 }
