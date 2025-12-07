@@ -1,5 +1,7 @@
+use std::collections::HashMap;
+
 fn main(){
-  let arr = [2,4,5,38];
+  let arr = [2,4,2,38];
   
   let s = sum_and_prod(arr);
   println!("Sum:{},Product:{} ",s.0,s.1);
@@ -8,7 +10,8 @@ fn main(){
   println!("{:?}",swapped_arr);
 
 
-
+  let u = print_unique(arr);
+  println!("{:?}",u);
 
 }
 
@@ -46,3 +49,12 @@ fn swap_minmax(mut arr: [i32;4]) -> [i32;4]{
     arr
 }
 
+
+fn print_unique(arr: [i32;4]) -> Vec<i32>{
+   let mut h = HashMap::new();
+   for i in arr{
+     *h.entry(i).or_insert(0)+=1;
+   }
+
+    h.keys().cloned().collect()
+}
