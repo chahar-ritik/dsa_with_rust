@@ -1,7 +1,9 @@
-use std::collections::HashMap;
+use std::collections::{HashMap,HashSet};
+
 
 fn main(){
   let arr = [2,4,2,38];
+  let arr_1 = [ 3,4,38];
   
   let s = sum_and_prod(arr);
   println!("Sum:{},Product:{} ",s.0,s.1);
@@ -12,6 +14,12 @@ fn main(){
 
   let u = print_unique(arr);
   println!("{:?}",u);
+
+  let vec = intersection_2arr(&arr,&arr_1);
+  println!("{:?}",vec);
+
+  let vec_1 = intersection(&arr,&arr_1);
+  println!("{:?}",vec_1);
 
 }
 
@@ -58,3 +66,30 @@ fn print_unique(arr: [i32;4]) -> Vec<i32>{
 
     h.keys().cloned().collect()
 }
+
+
+// this works but used nested loop that is inefficient
+//We can use Hashset
+fn intersection_2arr(a: &[i32] , b: &[i32]) -> Vec<i32>{
+    let mut v : Vec<i32> = Vec::new();
+    for &i in a {
+      for &j in b {
+        if i == j {
+          v.push(i);
+        }
+      }
+    }
+    v
+}
+
+
+//with hashset time complexity is less 
+fn intersection(a: &[i32] , b: &[i32]) -> Vec<i32>{
+  let set_a : HashSet<i32> = a.iter().cloned().collect();
+  let set_b : HashSet<i32> = b.iter().cloned().collect();
+
+
+  set_a.intersection(&set_b).cloned().collect()
+}
+
+
