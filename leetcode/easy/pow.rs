@@ -12,6 +12,9 @@ impl Solution {
         }
         else if n < 0{
             x = 1_f64/x;
+
+            // or we can put condition that if n == i32::MIN return ans = 0 ;
+            // this will save memory
             n = -n;
         }
        let mut ans = 1_f64;
