@@ -11,8 +11,11 @@ fn main() {
     let mut visit_cyc = vec![false; graph.len()];
     println!("Is cycle (checked using DFS): {}", isCycle_undirect_dfs(0 , -1 ,  &graph , &mut visit_cyc ));
     println!("Is cycle (checked using BFS): {}", isCycle_undirect_bfs(0 ,  &graph ));
-
-
+    
+    let mut dir_graph : Vec<Vec<usize>> = vec![vec![2,3], vec![0,4], vec![3] , vec![] , vec![5], vec![1]];
+      println!("Is cycle in directed graph (checked using DFS): {}",  isCycle_dir_dfs(&dir_graph));
+   
+   
 }
 
 fn isCycle_undirect_dfs(node: usize , par: i32, adj: &Vec<Vec<usize>>, visited: &mut Vec<bool>) -> bool {
@@ -51,4 +54,36 @@ fn isCycle_undirect_bfs(node: usize , adj : &Vec<Vec<usize>>) -> bool{
     }
     return false;
 
+}
+
+fn isCycle_dir_dfs(dir_graph: &Vec<Vec<usize>>)-> bool{
+    let mut visited_dir_graph = vec![false; dir_graph.len()];
+   let mut recpath = vec![false; dir_graph.len()];
+      
+      for v in 0..dir_graph.len(){
+        if !visited_dir_graph[v]{
+        if  isCycle_dir_dfs_helper(v ,  dir_graph , &mut visited_dir_graph , &mut recpath){
+        return true;
+              }
+         }
+      }
+      return false;
+}
+
+fn isCycle_dir_dfs_helper(node: usize , adj: &Vec<Vec<usize>> , visited: &mut Vec<bool> , recpath: &mut Vec<bool>) -> bool{
+    visited[node] = true;
+    recpath[node] = true;
+
+    for &next in &adj[node]{
+        if !visited[next]{
+            if isCycle_dir_dfs_helper(next , adj , visited , recpath){
+                return true;
+            }
+        }else if recpath[next]{
+            return true;
+        }
+    }
+
+    recpath[node] = false;
+    return false;
 }
