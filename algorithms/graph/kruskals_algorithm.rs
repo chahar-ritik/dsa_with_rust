@@ -1,7 +1,8 @@
 // this is kruskals_algo that is used in this probelm to find min_cost from given points
 // we just find out the MST and calculate cost 
 // as it uses sorting of all edges that increase it TC from O(n^2) to O(n^2logn
-//we use Prim's algorithm to reduce it to O(n^2)
+//we use Prim's algorithm to reduce it to O(n^2) it is not possible with standard prims algo that uses min_heap
+//we use optimal nested loop to find minimum cost neighbor
 
 impl Solution {
     pub fn min_cost_connect_points(points: Vec<Vec<i32>>) -> i32 {
