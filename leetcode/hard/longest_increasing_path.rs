@@ -1,5 +1,6 @@
 //LeetCode problem 329
 // as it is asked for strictly increasing path that can't make cycle that's a DAG we can use Topo_sort wtih bfs
+//we can also use dfs and dp 
 use std::collections::VecDeque;
 
 impl Solution {
